@@ -30,3 +30,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          TEST_ENV: ${{ vars.TEST_ENV }}
+          AUTH_MODE: ${{ vars.AUTH_MODE }}
