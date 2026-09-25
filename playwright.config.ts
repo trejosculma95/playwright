@@ -48,6 +48,7 @@ export default defineConfig({
     },
     {
       name: 'standard-chromium',
+      testIgnore: /.*\.api\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/standard-user.json',
@@ -56,6 +57,7 @@ export default defineConfig({
     },
     {
       name: 'visual-chromium',
+      testIgnore: /.*\.api\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/visual-user.json',
@@ -64,6 +66,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
+      testIgnore: /.*\.api\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
@@ -77,6 +80,7 @@ export default defineConfig({
     },
     {
       name: 'firefox',
+      testIgnore: /.*\.api\.spec\.ts/,
       use: { ...devices['Desktop Firefox'] },
     },
 
