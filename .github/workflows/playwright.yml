@@ -9,7 +9,8 @@ on:
       - main
 
 jobs:
-  test:
+
+  ui-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,17 +29,20 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run ui tests
+        run: >
+          npx playwright test
+          --project=standard-chromium
+          --project=visual-chromium
         env:
           TEST_ENV: ${{ vars.TEST_ENV }}
           AUTH_MODE: ${{ vars.AUTH_MODE }}
 
-      - name: Upload Playwright report
+      - name: Upload ui Playwright report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-ui-report
           path: playwright-report/
           retention-days: 7
 
@@ -50,10 +54,56 @@ jobs:
           path: test-results/
           retention-days: 7
       
-      - name: Publish test results
+      - name: Publish UI test results
         if: always()
         uses: dorny/test-reporter@v2
         with:
           name: Playwright Tests
           path: test-results/results.xml
           reporter: java-junit
+  
+  api-tests:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22
+            cache: npm
+
+        - name: Install dependencies
+          run: npm ci
+
+        - name: Run API tests
+          run: npx playwright test --project=api
+          env:
+            TEST_ENV: ${{ vars.TEST_ENV }}
+            AUTH_MODE: ${{ vars.AUTH_MODE }}
+        
+        - name: Upload api report
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: playwright-api-report
+            path: playwright-report/
+            retention-days: 7
+
+        - name: Upload test results
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: playwright-api-test-results
+            path: test-results/
+            retention-days: 7
+
+        - name: Publish API test results
+          if: always()
+          uses: dorny/test-reporter@v2
+          with:
+            name: Playwright API Tests
+            path: test-results/results.xml
+            reporter: java-junit
