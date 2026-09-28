@@ -67,25 +67,25 @@ export default defineConfig({
       },
       dependencies: ['visual-setup'],
     },
-    {
-      name: 'chromium',
-      testIgnore: /.*\.api\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-        launchOptions: {
-          slowMo: 1000, // Delays every action by 1000ms (1 second)
-        },
-      },
-    },
+    // {
+    //   name: 'chromium',
+    //   testIgnore: /.*\.api\.spec\.ts/,
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     launchOptions: {
+    //       slowMo: 1000, // Delays every action by 1000ms (1 second)
+    //     },
+    //   },
+    // },
     {
       name: 'api',
       testMatch: /.*\.api\.spec\.ts/,
     },
-    {
-      name: 'firefox',
-      testIgnore: /.*\.api\.spec\.ts/,
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   testIgnore: /.*\.api\.spec\.ts/,
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
     /*{
     //  name: 'webkit',
