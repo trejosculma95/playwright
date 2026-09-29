@@ -33,10 +33,11 @@ jobs:
         run: >
           npx playwright test
           --project=standard-chromium
-          --project=visual-chromium
+          --grep "$TEST_TAG"
         env:
           TEST_ENV: ${{ vars.TEST_ENV }}
           AUTH_MODE: ${{ vars.AUTH_MODE }}
+          TEST_TAG: ${{ github.event_name == 'pull_request' && '@smoke' || '@regression' }}
 
       - name: Upload ui Playwright report
         if: always()

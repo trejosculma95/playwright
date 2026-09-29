@@ -5,7 +5,7 @@ import { ProductBuilder } from '../../data/builders/ProductBuilder';
 import { ProductSchema } from '../../api/schemas/ProductSchema';
 import { expectSchema } from '../../utils/api/schemaAssertions';
 
-test('can retrieve products', async ({ productsApi }) => {
+test('can retrieve products', {tag: "@smoke"}, async ({ productsApi }) => {
     const response = await productsApi.getProducts();
     const products = await response.json()
 

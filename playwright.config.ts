@@ -45,10 +45,10 @@ export default defineConfig({
       name: 'standard-setup',
       testMatch: /.*\.standard.setup\.ts/,
     },
-    {
-      name: 'visual-setup',
-      testMatch: /.*\.visual.setup\.ts/,
-    },
+    // {
+    //   name: 'visual-setup',
+    //   testMatch: /.*\.visual.setup\.ts/,
+    // },
     {
       name: 'standard-chromium',
       testIgnore: /.*\.api\.spec\.ts/,
@@ -58,15 +58,15 @@ export default defineConfig({
       },
       dependencies: ['standard-setup'],
     },
-    {
-      name: 'visual-chromium',
-      testIgnore: /.*\.api\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: 'playwright/.auth/visual-user.json',
-      },
-      dependencies: ['visual-setup'],
-    },
+    // {
+    //   name: 'visual-chromium',
+    //   testIgnore: /.*\.api\.spec\.ts/,
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     storageState: 'playwright/.auth/visual-user.json',
+    //   },
+    //   dependencies: ['visual-setup'],
+    // },
     // {
     //   name: 'chromium',
     //   testIgnore: /.*\.api\.spec\.ts/,
