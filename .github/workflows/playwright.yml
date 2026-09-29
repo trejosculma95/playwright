@@ -83,10 +83,11 @@ jobs:
           run: npx playwright install --with-deps
 
         - name: Run API tests
-          run: npx playwright test --project=api
+          run: npx playwright test --project=api --grep "$TEST_TAG"
           env:
             TEST_ENV: ${{ vars.TEST_ENV }}
             AUTH_MODE: ${{ vars.AUTH_MODE }}
+            TEST_TAG: ${{ github.event_name == 'pull_request' && '@smoke' || '@regression' }}
         
         - name: Upload api report
           if: always()
