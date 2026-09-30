@@ -17,7 +17,7 @@ test('can retrieve products', {tag: "@smoke"}, async ({ productsApi }) => {
     expect(products[0].rating).toEqual(expect.any(Object));
 });
 
-test('returns expected response for a known product', async ({ productsApi }) => {
+test('returns expected response for a known product', {tag: "@smoke"} ,async ({ productsApi }) => {
 
     const response = await productsApi.getProduct('6');
     
